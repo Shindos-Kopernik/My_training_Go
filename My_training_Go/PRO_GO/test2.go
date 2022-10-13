@@ -3,11 +3,17 @@ package main
 import "fmt"
 
 func main() {
-	products := [4]string{"Kayak", "Lifejacket", "Paddle", "Hat"}
-	allNames := products[1:]
-	someNames := allNames[1:3]
-	allNames = append(allNames, "Gloves")
-	allNames[1] = "Canoe"
-	fmt.Println("someNames:", someNames)
-	fmt.Println("allNames", allNames)
+	product := map[string]float64{
+		"Kayak": 1,
+		"Lol":   40.12,
+		"Hat":   0,
+	}
+	value, ok := product["Hat"]
+	if ok {
+		fmt.Println("Stored value:", value)
+	} else {
+		fmt.Println("No")
+	}
+	fmt.Println(product["Kayak"])
+	fmt.Println(product["Lol"])
 }
