@@ -2,13 +2,12 @@ package main
 
 import "fmt"
 
-func printPrice() {
-	kayakPrice := 275.00
-	kayakTax := kayakPrice * 0.2
-	fmt.Println("Price:", kayakPrice, "Tax:", kayakTax)
+func printPrice(product string, price, _ float64) {
+	taxAmount := price * 0.25
+	fmt.Println(product, "price:", price, "Tax:", taxAmount)
 }
 func main() {
-	fmt.Println("About to call function")
-	printPrice()
-	fmt.Println("Function complete")
+	printPrice("Kayak", 275, 0.2)
+	printPrice("Lifejacket", 48.95, 0.2)
+	printPrice("Soccer Ball", 19.50, 0.15)
 }
