@@ -15,16 +15,16 @@ type InterfaceHere interface {
 }
 
 func main() {
-	var a InterfaceHere
-	sh := structHere{N1: 1, N2: 2}
-	os := otherStruct{A: 2, B: 3}
-	a = &sh
-	a.Sum()
-	fmt.Println(a.Sum())
-	a = &os
-	fmt.Println(a.Sum())
-	var i InterfaceHere = otherStruct{A: 10, B: 43}
-	fmt.Println(i.Sum())
+	var os *structHere
+	var i InterfaceHere
+	i = os
+	//fmt.Println(i.Sum())
+	fmt.Printf("(%v, %T)\n", i, i)
+	if i == nil {
+		fmt.Println("nil")
+	} else {
+		fmt.Println("not nil")
+	}
 }
 
 type otherStruct struct {
