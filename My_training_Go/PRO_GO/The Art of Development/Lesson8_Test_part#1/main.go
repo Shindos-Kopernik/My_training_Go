@@ -1,1 +1,8 @@
-package Lesson8_Test_part_1
+package main
+
+func main() {
+
+}
+func Multiple(x, y int) int {
+	return x * y
+}
