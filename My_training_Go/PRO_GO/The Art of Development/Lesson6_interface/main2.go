@@ -27,7 +27,7 @@ type superUser struct {
 
 func (s *superUser) Block() {
 	u.IsBlocked = true
->>>>>>> origin/main
+ origin/main
 }
 
 var _ User = &user{}
