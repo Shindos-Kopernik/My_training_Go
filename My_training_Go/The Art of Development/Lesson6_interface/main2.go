@@ -27,7 +27,7 @@ type superUser struct {
 
 func (s *superUser) Block() {
 	u.IsBlocked = true
- origin/main
+ origin/ main
 }
 
 var _ User = &user{}
@@ -78,5 +78,5 @@ func NewUser(fio, address, phone string) User {
 func main() {
 	u := NewUser("", "", "")
 	u.Block()
->>>>>>> origin/main
+>>>>>>> origin/ main
 }
