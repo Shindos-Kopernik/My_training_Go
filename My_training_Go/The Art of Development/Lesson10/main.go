@@ -7,15 +7,21 @@ import (
 )
 
 type Counter struct {
-	mu sync.Mutex
+	mu sync.Mutex // Mutex защищает с и должен стоять выше значения, которое он защищает (организацион. договоренность)
 	c  map[string]int
 }
 
 func (c *Counter) Inc(key string) {
-	c.c[key]++
+	c.mu.Lock() // Не держите блокировку дольше чем это требуется
+	c.c[key]++  // TODO код между Lock & Unlock называется "критичиская секция"(КС). Не рекоменд. в КС держать много кода
+	// КС - код эксклюзивного доступа
+	c.mu.Unlock()
+	// fmt.Println("done")
 }
 
 func (c *Counter) Value(key string) int {
+	c.mu.Lock()
+	defer c.mu.Unlock() // Использовать когда в return критический код
 	return c.c[key]
 }
 
