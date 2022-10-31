@@ -1,7 +1,6 @@
 package main
 
 import "fmt"
-import "github.com/mitchellh/mapstructure"
 
 type Point struct {
 	X int
@@ -9,7 +8,7 @@ type Point struct {
 }
 
 func (p Point) method() {
-	fmt.Println("Call Point Metod")
+	fmt.Println("Call Point Method")
 }
 func main() {
 	pointsMap := map[string]int{

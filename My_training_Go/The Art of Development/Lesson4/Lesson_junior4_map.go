@@ -8,7 +8,7 @@ type Point struct {
 }
 
 func (p Point) method() {
-	fmt.Println("Call Point Metod")
+	fmt.Println("Call Point Method")
 }
 func main() {
 	pointsMap := map[string]Point{
