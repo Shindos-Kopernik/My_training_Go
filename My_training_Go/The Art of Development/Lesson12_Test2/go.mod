@@ -1,4 +1,4 @@
-module My_training_Go
+module Lesson12_Test2
 
 go 1.19
 
