@@ -1,7 +1,6 @@
 package main
 
 import (
-	"My_training_Go/My_training_Go/The Art of Development/Lessons_Golang2_Advanced_Playlist2/Lesson1_Rest_API/internal/user"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"log"
@@ -10,18 +9,17 @@ import (
 	"time"
 )
 
-func main() {
-	fmt.Println("create router")
-	router := httprouter.New()
-	handler := user.NewHandler()
-	handler.Register(router)
-
-	start(router)
-
+func IndexHandler(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
+	name := params.ByName("name")
+	w.Write([]byte(fmt.Sprintf("Hello %s", name)))
 }
 
-func start(router *httprouter.Router) {
-	listener, err := net.Listen("tcp", "127.0.0.1:1234")
+func main() {
+	router := httprouter.New()
+	router.GET("/:name", IndexHandler)
+
+	listener, err := net.Listen("tcp", "127.0.0.1:1234") // 127.0.0.1 - это адрес не текущей машины,
+	// а адрес loopback интерфейса "loo"
 	if err != nil {
 		panic(err)
 	}
