@@ -13,7 +13,7 @@ func main() {
 "friends": [
 {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb","tw"]},
 {"first": "Roger", "last": "Craig", "age": 47, "nets": ["fb","tw"]},
-{"first": "Jane", "last": "Murphy", "age": 42, "nets": ["ig, "tw"]},
+{"first": "Jane", "last": "Murphy", "age": 42, "nets": ["ig", "tw"]},
 ]}`
 
 	value := gjson.Get(json, "children")

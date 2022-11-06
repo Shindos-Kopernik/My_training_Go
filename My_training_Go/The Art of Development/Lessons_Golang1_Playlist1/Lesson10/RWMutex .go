@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"sync"
-	"time"
 )
 
 type Counter struct {

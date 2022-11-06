@@ -12,10 +12,10 @@ func main() {
   "children": ["Sara", "Alex", "Jack"],
   "fav.movie": "Deer Hunter",
   "friends": [
-    //{"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb","tw"]},
-    //{"first": "Roger", "last": "Craig", "age": 47, "nets": ["fb","tw"]},
-    {"first": "Jane", "last": "Murphy", "age": 42, "nets": ["ig, "tw"]}
-  ]
+    {"first": "Dale", "last": "Murphy", "age": 44, "nets": ["ig", "fb","tw"]},
+    {"first": "Roger", "last": "Craig", "age": 47, "nets": ["fb","tw"]},
+    {"first": "Jane", "last": "Murphy", "age": 42, "nets": ["ig", "tw"]
+  }]
 }`
 	//if !gjson.Valid(json) {
 	//	panic("JSON IS NOT VALID")
@@ -28,12 +28,11 @@ func main() {
 	//}
 	//return json
 	//})
-	value := gjson.Get(json, `friends.#(age==47)#.first`)
+	value := gjson.Get(json, `friends.#(age>=42)#.first`)
 	// fav.movie если напишем с точкой, то не получим не чего fav\\.movie -good!
 	// value := gjson.Get(json, "children.#") - получим кол-во детей(размерность массива)
 	// child*.2 -> Jack; friends.1.last -> Craig; `friends.#(last=="Murphy").first` -> Dale;
-	//`friends.#(last== age).first`(первый попавшийся эл-т), чтобы всех нашел (json, `friends.#(age==47)#.first`), не
-	// получилось!!!;
+	//`friends.#(last== age).first`(первый попавшийся эл-т), чтобы всех нашел (json, `friends.#(age==47)#.first`)
 	fmt.Println(value.String())
 	//fmt.Println(json.Parse(json).Get("name"))
 	//resault, ok := gjson.Parse(json).Value().(map[string]interface{})
