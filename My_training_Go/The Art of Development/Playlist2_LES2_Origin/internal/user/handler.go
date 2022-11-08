@@ -34,8 +34,8 @@ func (h *handler) Register(router *httprouter.Router) {
 
 }
 func (h *handler) GetList(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	w.WriteHeader(200)
 	w.Write([]byte("this is list of users"))
+	w.WriteHeader(200)
 }
 
 func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
