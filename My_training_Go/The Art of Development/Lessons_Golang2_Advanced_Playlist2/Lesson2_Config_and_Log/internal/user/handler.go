@@ -1,7 +1,6 @@
 package user
 
 import (
-	"Lesson1_Rest_API/internal/handlers"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
