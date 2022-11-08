@@ -2,11 +2,12 @@ package user
 
 import (
 	"Lesson1_Rest_API/internal/handlers"
+	"Lesson1_Rest_API/pkg/logging"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
 
-var _ handlers.Handler = &handler{} // подсказка
+var _ handlers.Handler = &handler{}
 
 const (
 	usersURL = "/users"
@@ -14,10 +15,13 @@ const (
 )
 
 type handler struct {
+	logger logging.Logger
 }
 
-func NewHandler() handlers.Handler {
-	return &handler{}
+func NewHandler(logger logging.Logger) handlers.Handler {
+	return &handler{
+		logger: logger,
+	}
 
 }
 func (h *handler) Register(router *httprouter.Router) {
