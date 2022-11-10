@@ -1,0 +1,5 @@
+---
+
+is debug: true
+listen:
+  type: sock
