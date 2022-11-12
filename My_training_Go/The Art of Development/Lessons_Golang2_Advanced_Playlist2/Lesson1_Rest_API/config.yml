@@ -1,5 +1,5 @@
 ---
 
-is debug: true
+is_debug: true
 listen:
   type: sock
