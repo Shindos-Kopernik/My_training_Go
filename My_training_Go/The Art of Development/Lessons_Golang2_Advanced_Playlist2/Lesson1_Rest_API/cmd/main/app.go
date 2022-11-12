@@ -31,8 +31,10 @@ func main() {
 func start(router *httprouter.Router, cfg *config.Config) {
 	logger := logging.GetLogger()
 	logger.Info("start application")
+
 	var listener net.Listener
 	var listenErr error
+	
 	if cfg.Listen.Type == "sock" {
 		logger.Info("detect app.path")
 		appDir, err := filepath.Abs(filepath.Dir(os.Args[0]))
@@ -44,7 +46,7 @@ func start(router *httprouter.Router, cfg *config.Config) {
 
 		logger.Info("listen unix socket")
 		listener, listenErr = net.Listen("unix", socketPath)
-		logger.Infof("server is listering unix socket:%s", socketPath)
+		logger.Infof("server is listering unix socket: %s", socketPath)
 
 	} else {
 		logger.Info("listen tcp port")
@@ -52,7 +54,7 @@ func start(router *httprouter.Router, cfg *config.Config) {
 		logger.Infof("server is listening port %s:%s", cfg.Listen.BindIP, cfg.Listen.Port)
 	}
 	if listenErr != nil {
-		//logger.Fatal(listenErr)
+		logger.Fatal(listenErr)
 	}
 
 	server := &http.Server{
