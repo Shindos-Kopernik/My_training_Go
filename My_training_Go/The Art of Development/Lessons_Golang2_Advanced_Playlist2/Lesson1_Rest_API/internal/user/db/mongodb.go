@@ -50,7 +50,27 @@ func (d db) FindOne(ctx context.Context, id string) (u user.User, err error) {
 }
 
 func (d db) Update(ctx context.Context, user user.User) error {
+	objectID, err := primitive.ObjectIDFromHex(user.ID)
+	if err != nil {
+		return fmt.Errorf("failed to convert user ID to objectID. Id=%s", user.ID)
+	}
+	filter := bson.M{"_id":objectID}
 
+	userByte, err := bson.Marshal(user)
+	if err != nil {
+		return fmt.Errorf("failed to marshal user. erroe: %v", err)
+	}
+
+	var updateUserObj bson.M
+	err = bson.Unmarshal(userByte, &updateUserObj)
+	if err != nil {
+		return fmt.Errorf("failed unmarshal user bytes. error: %v", err)
+	}
+	delete(updateUserObj, "_id")
+
+	update := bson.M{
+		"$set": updateUserObj,
+	}
 }
 
 func (d db) Delete(ctx context.Context, id string) error {
