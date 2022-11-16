@@ -4,6 +4,7 @@ import (
 	"Lesson1_Rest_API/internal/apperror"
 	"Lesson1_Rest_API/internal/handlers"
 	"Lesson1_Rest_API/pkg/logging"
+	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
@@ -35,23 +36,14 @@ func (h *handler) Register(router *httprouter.Router) {
 
 }
 func (h *handler) GetList(w http.ResponseWriter, r *http.Request) error {
-	w.WriteHeader(200)
-	w.Write([]byte("this is list of users"))
-
-	return nil
+	return apperror.ErrNotFound
 }
 
 func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request) error {
-	w.WriteHeader(201)
-	w.Write([]byte("this is create user"))
-
-	return nil
+	return fmt.Errorf("this is API error")
 }
 func (h *handler) GetUserByUUID(w http.ResponseWriter, r *http.Request) error {
-	w.WriteHeader(200)
-	w.Write([]byte("this is user by uuid"))
-
-	return nil
+	return apperror.NewAppError(nil, "test", "test", "t13")
 }
 func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request) error {
 	w.WriteHeader(204)

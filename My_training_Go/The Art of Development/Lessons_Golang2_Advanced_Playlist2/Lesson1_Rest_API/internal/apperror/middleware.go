@@ -18,18 +18,22 @@ func Middleware(h appHandler) http.HandlerFunc {
 					w.Write(ErrNotFound.Marshal())
 					return
 				}
+
 				//} else if errors.Is(err, NoAuthErr) {
 				//	w.WriteHeader(http.StatusUnauthorized)
 				//	w.Write(ErrNotFound.Marshal())
 				//	return
 				//}
+
 				err = err.(*AppError)
-				w.WriteHeader(http.StatusBadRequest)
+				w.WriteHeader(http.StatusBadRequest) // когда код выбрасывает error 418, то мы точно знаем, что накосячил наш КОД!
 				w.Write(ErrNotFound.Marshal())
+				return
 			}
 
-			w.WriteHeader(http.StatusTeapot) //не наша ошибка, отдаем как есть. А надо обернуть в систем. ошибку
-			w.Write([]byte(err.Error()))
+			w.WriteHeader(http.StatusTeapot) // не наша ошибка, отдаем как есть. А надо обернуть в систем. ошибку
+			// w.Write([]byte(err.Error())) // так не красиво и "неправильно"
+			w.Write(systemError(err).Marshal()) // Красиво обернутые ситем. ошибки
 		}
 	}
 }
