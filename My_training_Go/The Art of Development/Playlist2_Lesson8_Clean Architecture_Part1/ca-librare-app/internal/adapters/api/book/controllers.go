@@ -1,8 +1,8 @@
 package user
 
 import (
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Architecture_Part1/ca-librare-app/internal/adapters"
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Architecture_Part1/ca-librare-app/internal/book"
+	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Architecture_Part1/ca-librare-app/internal/adapters/api"
+	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Architecture_Part1/ca-librare-app/internal/domain/book"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
@@ -16,7 +16,7 @@ type handler struct {
 	bookService book.Service
 }
 
-func NewHandler(service book.Service) adapters.Handler {
+func NewHandler(service book.Service) api.Handler {
 	return &handler{bookService: service}
 }
 

@@ -1,4 +1,4 @@
-package adapters
+package api
 
 import "github.com/julienschmidt/httprouter"
 
