@@ -7,7 +7,7 @@ listen:
 mongodb:
   host: localhost
   port: 27017
-  database: user-service
+  database: author-service
   auth_db: go-mongo
   username: admin
   password: admin

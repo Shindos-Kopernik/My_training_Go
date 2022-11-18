@@ -30,7 +30,7 @@ func main() {
 
 	//storage := db.NewStorage(mongoDBClient, cfg.MongoDB.Collection, logger)
 
-	logger.Info("register user handler")
+	logger.Info("register author handler")
 	handler := user.NewHandler(logger)
 	handler.Register(router)
 

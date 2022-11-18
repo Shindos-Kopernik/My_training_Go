@@ -80,7 +80,7 @@ func main() {
 		panic(err)
 	}
 
-	logger.Info("register user handler")
+	logger.Info("register author handler")
 	handler := user.NewHandler(logger)
 	handler.Register(router)
 

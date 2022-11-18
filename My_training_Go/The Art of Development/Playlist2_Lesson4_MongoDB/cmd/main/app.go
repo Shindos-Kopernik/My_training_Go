@@ -21,7 +21,7 @@ func main() {
 
 	cfg := config.GetConfig()
 
-	logger.Info("register user handler")
+	logger.Info("register author handler")
 	handler := user.NewHandler(logger)
 	handler.Register(router)
 
@@ -34,7 +34,7 @@ func start(router *httprouter.Router, cfg *config.Config) {
 
 	var listener net.Listener
 	var listenErr error
-	
+
 	if cfg.Listen.Type == "sock" {
 		logger.Info("detect app.path")
 		appDir, err := filepath.Abs(filepath.Dir(os.Args[0]))

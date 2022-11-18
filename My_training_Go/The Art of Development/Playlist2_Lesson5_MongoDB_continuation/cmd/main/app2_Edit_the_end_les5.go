@@ -36,7 +36,7 @@ func main() {
 	users, err := storage.FindAll(context.Background())
 	fmt.Println(users)
 
-	logger.Info("register user handler")
+	logger.Info("register author handler")
 	handler := user.NewHandler(logger)
 	handler.Register(router)
 

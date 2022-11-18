@@ -17,10 +17,10 @@ type db struct {
 }
 
 func (d db) Create(ctx context.Context, user user.User) (string, error) {
-	d.logger.Debug("create user")
+	d.logger.Debug("create author")
 	result, err := d.collection.InsertOne(ctx, user)
 	if err != nil {
-		return "", fmt.Errorf("failed to create user due to error: %v", err)
+		return "", fmt.Errorf("failed to create author due to error: %v", err)
 	}
 	d.logger.Debug("convert InsertedID to ObjectID")
 	oid, ok := result.InsertedID.(primitive.ObjectID)
@@ -62,10 +62,10 @@ func (d db) FindOne(ctx context.Context, id string) (u user.User, err error) {
 			// TODO ErrEntityNotFound
 			return u, fmt.Errorf("not found")
 		}
-		return u, fmt.Errorf("failed to find one user by id: %s due to error: %v", id, err)
+		return u, fmt.Errorf("failed to find one author by id: %s due to error: %v", id, err)
 	}
 	if err = result.Decode(&u); err != nil {
-		return u, fmt.Errorf("failed to decode user(id:%s) from DB due to error: %v", id, err)
+		return u, fmt.Errorf("failed to decode author(id:%s) from DB due to error: %v", id, err)
 	}
 	return u, nil
 }
@@ -80,13 +80,13 @@ func (d db) Update(ctx context.Context, user user.User) error {
 
 	userBytes, err := bson.Marshal(user)
 	if err != nil {
-		return fmt.Errorf("failed to marshal user. error: %v", err)
+		return fmt.Errorf("failed to marshal author. error: %v", err)
 	}
 	// {"id":122412412}
 	var updateUserObj bson.M
 	err = bson.Unmarshal(userBytes, &updateUserObj)
 	if err != nil {
-		return fmt.Errorf("failed to unmarshal user bytes. error: %v", err)
+		return fmt.Errorf("failed to unmarshal author bytes. error: %v", err)
 	}
 	delete(updateUserObj, "_id")
 
@@ -96,7 +96,7 @@ func (d db) Update(ctx context.Context, user user.User) error {
 
 	result, err := d.collection.UpdateOne(ctx, filter, update)
 	if err != nil {
-		return fmt.Errorf("failed to execute update user query. error: %v", err)
+		return fmt.Errorf("failed to execute update author query. error: %v", err)
 	}
 	if result.MatchedCount == 0 { // MatchedCount --нашли ли мы, что-нибудь, т.к. mongo сперва ищет сущность,
 		// TODO ErrEntityNotFound     // а затем её обновляет

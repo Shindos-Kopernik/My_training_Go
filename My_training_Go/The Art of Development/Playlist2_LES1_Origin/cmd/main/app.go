@@ -13,7 +13,7 @@ func main() {
 	log.Println("create router")
 	router := httprouter.New()
 
-	log.Println("register user handler")
+	log.Println("register author handler")
 	handler := user.NewHandler()
 	handler.Register(router)
 

@@ -36,11 +36,11 @@ func (h *handler) GetList(w http.ResponseWriter, r *http.Request, params httprou
 
 func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	w.WriteHeader(201)
-	w.Write([]byte("this is create user"))
+	w.Write([]byte("this is create author"))
 }
 func (h *handler) GetUserByUUID(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	w.WriteHeader(200)
-	w.Write([]byte("this is user by uuid"))
+	w.Write([]byte("this is author by uuid"))
 }
 func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	w.WriteHeader(204)

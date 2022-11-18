@@ -16,10 +16,10 @@ type db struct {
 }
 
 func (d db) Create(ctx context.Context, user user.User) (string, error) {
-	d.logger.Debug("create user")
+	d.logger.Debug("create author")
 	result, err := d.collection.InsertOne(ctx, user)
 	if err != nil {
-		return "", fmt.Errorf("failed to create user due to error: %v", err)
+		return "", fmt.Errorf("failed to create author due to error: %v", err)
 	}
 	d.logger.Debug("convert InsertedID to ObjectID")
 	oid, ok := result.InsertedID.(primitive.ObjectID)
@@ -41,10 +41,10 @@ func (d db) FindOne(ctx context.Context, id string) (u user.User, err error) {
 	result := d.collection.FindOne(ctx, filter)
 	// TODO 404
 	if result.Err() != nil {
-		return u, fmt.Errorf("failed to find one user by id: %s due to error: %v", id, err)
+		return u, fmt.Errorf("failed to find one author by id: %s due to error: %v", id, err)
 	}
 	if err = result.Decode(&u); err != nil {
-		return u, fmt.Errorf("failed to decode user(id:%s) from DB due to error: %v", id, err")
+		return u, fmt.Errorf("failed to decode author(id:%s) from DB due to error: %v", id, err")
 	}
 	return u, nil
 }

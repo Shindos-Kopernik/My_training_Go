@@ -21,7 +21,7 @@ func main() {
 
 	cfg := config.GetConfig()
 
-	logger.Info("register user handler")
+	logger.Info("register author handler")
 	handler := user.NewHandler(logger)
 	handler.Register(router)
 
