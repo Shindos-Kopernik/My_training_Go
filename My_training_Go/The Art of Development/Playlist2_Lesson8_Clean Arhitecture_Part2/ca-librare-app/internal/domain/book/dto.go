@@ -4,6 +4,7 @@ type CreateBookDTO struct {
 	Name       string `json:"name"`
 	Year       string `json:"year"`
 	AuthorUUID string `json:"author_uuid"`
+	GenreUUID  string `json:"genre_uuid"`
 }
 type UpdateBookDTO struct {
 	UUID       string `json:"uuid"`

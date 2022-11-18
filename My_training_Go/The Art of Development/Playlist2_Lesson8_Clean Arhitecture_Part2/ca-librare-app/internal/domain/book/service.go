@@ -1,12 +1,15 @@
 package book
 
 import (
+	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Arhitecture_Part2/ca-librare-app/internal/adapters/api/author"
 	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Arhitecture_Part2/ca-librare-app/internal/adapters/api/book"
 	"context"
 )
 
 type service struct {
-	storage Storage
+	storage       Storage
+	authorService author.Service
+	genreService  genre.Service
 }
 
 func NewService(storage Storage) book.Service {
@@ -14,7 +17,8 @@ func NewService(storage Storage) book.Service {
 }
 
 func (s *service) Create(ctx context.Context, dto *CreateBookDTO) *Book {
-	s.storage.Create()
+	author := s.authorService.GetByUUID(ctx, dto.AuthorUUID)
+	genre := s.genreService.GetByUUID(ctx, dto.AuthorUUID)
 	return nil
 }
 

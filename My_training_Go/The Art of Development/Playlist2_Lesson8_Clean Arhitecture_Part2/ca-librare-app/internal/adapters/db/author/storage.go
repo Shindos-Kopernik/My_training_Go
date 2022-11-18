@@ -1,10 +1,14 @@
-package book
+package author
 
 import (
 	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Arhitecture_Part2/ca-librare-app/internal/domain/author"
 )
 
 type authorStorage struct {
+}
+
+func NewStorage() author.Storage {
+	return &authorStorage{}
 }
 
 func (bs *authorStorage) GetOne(uuid string) *author.Author {

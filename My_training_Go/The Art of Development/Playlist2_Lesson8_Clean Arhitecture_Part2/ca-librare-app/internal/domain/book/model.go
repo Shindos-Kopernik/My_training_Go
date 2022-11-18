@@ -10,6 +10,7 @@ type Book struct {
 	Name   string        `json:"name,omitempty"`
 	Year   string        `json:"year,omitempty"`
 	Author author.Author `json:"author,omitempty"`
+	Genre  genre.Genre   `json:"genre"`
 	Busy   bool          `json:"busy,omitempty"`
 	Owner  string        `json:"owner,omitempty"`
 }
