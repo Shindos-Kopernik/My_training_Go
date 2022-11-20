@@ -1,8 +1,8 @@
 package book
 
 import (
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Arhitecture_Part2/ca-librare-app/internal/adapters/api/author"
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Arhitecture_Part2/ca-librare-app/internal/adapters/api/book"
+	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson7_Clean Arhitecture_Part2/ca-library-app/internal/adapters/api/author"
+	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson7_Clean Arhitecture_Part2/ca-library-app/internal/adapters/api/book"
 	"context"
 )
 
@@ -12,7 +12,7 @@ type service struct {
 	genreService  genre.Service
 }
 
-func NewService(storage Storage) book.Service {
+func NewService(storage interface{}) book.Service {
 	return &service{storage: storage}
 }
 

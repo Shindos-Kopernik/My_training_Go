@@ -1,15 +1,12 @@
 package author
 
-import (
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson8_Clean Arhitecture_Part2/ca-librare-app/internal/adapters/api/author"
-	"context"
-)
+import "context"
 
 type service struct {
 	storage Storage
 }
 
-func NewService(storage Storage) author.Service {
+func NewService(storage interface{}) interface{} {
 	return &service{storage: storage}
 }
 
