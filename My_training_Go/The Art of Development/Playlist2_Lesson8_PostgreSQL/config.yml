@@ -1,0 +1,13 @@
+---
+
+is_debug: true
+listen:
+  type: sock
+mongodb:
+  host: localhost
+  port: 27017
+  database: author-service
+  auth_db: go-mongo
+  username: admin
+  password: admin
+  collection: users
