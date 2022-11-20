@@ -1,6 +1,8 @@
 package book
 
 import (
+	"ca-library-app/internal/adapters/api/author"
+	"ca-library-app/internal/adapters/api/book"
 	"context"
 )
 

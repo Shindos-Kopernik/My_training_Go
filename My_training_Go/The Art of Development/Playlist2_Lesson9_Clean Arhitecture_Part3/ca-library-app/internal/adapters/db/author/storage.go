@@ -1,12 +1,16 @@
 package author
 
-import "awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part3/ca-library-app/internal/domain/author"
+import (
+	"ca-library-app/internal/domain/author"
+	"go.mongodb.org/mongo-driver/mongo"
+)
 
 type authorStorage struct {
+	db *mongo.Database
 }
 
-func NewStorage() author.Storage {
-	return &authorStorage{}
+func NewStorage(db *mongo.Database) author.Storage {
+	return &authorStorage{db: db}
 }
 
 func (bs *authorStorage) GetOne(uuid string) *author.Author {

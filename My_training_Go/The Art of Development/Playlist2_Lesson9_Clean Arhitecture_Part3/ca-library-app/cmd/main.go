@@ -1,20 +1,43 @@
 package main
 
 import (
-	author3 "awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part2/ca-library-app/internal/adapters/api/author"
-	book3 "awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part2/ca-library-app/internal/adapters/api/book"
-	author2 "awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part2/ca-library-app/internal/adapters/db/author"
-	book2 "awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part2/ca-library-app/internal/adapters/db/book"
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part3/ca-library-app/internal/domain/author"
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part3/ca-library-app/internal/domain/book"
+	"ca-library-app/internal/composites"
+	"ca-library-app/internal/config"
+	"ca-library-app/pkg/logging"
+	"context"
+	"github.com/julienschmidt/httprouter"
 )
 
 func main() {
-	bookStorage := book2.NewStorage()
-	bookService := book.NewService(bookStorage)
-	bookHandler := book3.NewHandler(bookService)
+	// entry point  точка входа в приложение
+	logging.Init()
+	logger := logging.GetLogger()
 
-	authorStorage := author2.NewStorage()
-	authorService := author.NewService(authorStorage)
-	authorHandler := author3.NewHandler(authorService)
+	logger.Info("get initializing")
+	cfg := config.GetConfig()
+
+	logger.Info("router initializing")
+	router := httprouter.New()
+
+	logger.Info("mongodb composite initializing")
+	mongoDBC, err := composites.NewMongoDBComposite(context.Background(), "", "", "", "", "", "")
+	if err != nil {
+		logger.Fatal("mongodb composite failed")
+	}
+	logger.Info("author composite initializing")
+	authorComposite, err := composites.NewAuthorComposite(mongoDBC)
+	if err != nil {
+		logger.Fatal("author composite failed")
+	}
+
+	authorComposite.Handler.Register(router)
+
+	logger.Info("book composite initializing")
+	bookComposite, err := composites.NewBookComposite(mongoDBC)
+	if err != nil {
+		logger.Fatal("book composite failed")
+	}
+	bookComposite.Handler.Register(router)
+
+	// start
 }

@@ -1,12 +1,15 @@
 package author
 
-import "context"
+import (
+	"ca-library-app/internal/adapters/api/author"
+	"context"
+)
 
 type service struct {
 	storage Storage
 }
 
-func NewService(storage interface{}) interface{} {
+func NewService(storage Storage) author.Service {
 	return &service{storage: storage}
 }
 

@@ -1,7 +1,7 @@
 package book
 
 import (
-	"awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part3/ca-library-app/internal/domain/author"
+	"ca-library-app/internal/domain/author"
 	"fmt"
 )
 

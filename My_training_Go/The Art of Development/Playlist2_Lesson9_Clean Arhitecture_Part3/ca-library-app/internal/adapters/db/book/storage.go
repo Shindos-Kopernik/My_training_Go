@@ -1,12 +1,16 @@
 package book
 
-import "awesomeProject2/My_training_Go/My_training_Go/The Art of Development/Playlist2_Lesson9_Clean Arhitecture_Part3/ca-library-app/internal/domain/book"
+import (
+	"ca-library-app/internal/domain/book"
+	"go.mongodb.org/mongo-driver/mongo"
+)
 
 type bookStorage struct {
+	db *mongo.Database
 }
 
-func NewStorage() book.Storage {
-	return &bookStorage{}
+func NewStorage(db *mongo.Database) book.Storage {
+	return &bookStorage{db: db}
 }
 
 func (bs *bookStorage) GetOne(uuid string) *book.Book {
