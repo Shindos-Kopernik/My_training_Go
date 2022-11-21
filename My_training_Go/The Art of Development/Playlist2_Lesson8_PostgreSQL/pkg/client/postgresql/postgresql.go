@@ -1,10 +1,14 @@
 package postgresql
 
 import (
+	"Lesson1_Rest_API/pkg/utils"
 	"context"
 	"fmt"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgx/v4"
+	"github.com/jackc/pgx/v4/pgxpool"
+	"log"
+	"time"
 )
 
 // Этот интерфейс будет реализовывать pgx class connection
@@ -16,6 +20,23 @@ type Client interface {
 	Begin(ctx context.Context) (pgx.Tx, error)
 }
 
-func NewClient(ctx context.Context, username, password, host, port, database string) {
+func NewClient(ctx context.Context, maxAttempts int, username, password, host, port, database string(*pgxpool.Pool, err error) {
 	dsn := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", username, password, host, port, database)
+	err := utils.DoWithTries(func() error {
+		ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+		defer cancel()
+
+		pool, err := pgxpool.Connect(ctx, dsn)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	}, maxAttempts, 5*time.Second)
+
+	if err != nil {
+		log.Fatal("error do with tries postgresql")
+	}
+
+	return pool, nil
 }
