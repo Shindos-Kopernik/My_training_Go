@@ -13,6 +13,10 @@ author_id UUID NOT NULL ,
 CONSTRAINT author_fk FOREIGN KEY (author_id) REFERENCES public.author(id)
 );
 
-INSERT INTO author (name) VALUES ('Народ');
-INSERT INTO author (name) VALUES ('Джофн Роулинг');
-INSERT INTO author (name) VALUES ('Джек Лондон');
+INSERT INTO author (name) VALUES ('Народ'); --02a3d7a0-d03a-4908-9f80-67e0495b9e2b
+INSERT INTO author (name) VALUES ('Джофн Роулинг'); --9d98ee85-dbee-4f69-b2fa-4f78131d0646
+INSERT INTO author (name) VALUES ('Джек Лондон'); --f1f3fc2f-c497-488b-add2-0a11094f3993
+
+INSERT INTO  book (name, author_id) VALUES ('Колобок', '02a3d7a0-d03a-4908-9f80-67e0495b9e2b')
+INSERT INTO book (name, author_id) VALUES ('Гарри Поттер', '9d98ee85-dbee-4f69-b2fa-4f78131d0646')
+INSERT INTO book (name, author_id) VALUES ('Бриллиант', 'f1f3fc2f-c497-488b-add2-0a11094f3993')
