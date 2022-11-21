@@ -3,11 +3,9 @@
 is_debug: true
 listen:
   type: sock
-mongodb:
+storage:
   host: localhost
-  port: 27017
-  database: author-service
-  auth_db: go-mongo
-  username: admin
-  password: admin
-  collection: users
+  port: 5432
+  database: postgres
+  username: postgres
+  password: postgres
